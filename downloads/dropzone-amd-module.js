@@ -1158,6 +1158,13 @@ Emitter.prototype.hasListeners = function(event){
       fileReader.onload = (function(_this) {
         return function() {
           var img;
+          if (file.type === "image/svg+xml") {
+            _this.emit("thumbnail", file, fileReader.result);
+            if (callback != null) {
+              callback();
+            }
+            return;
+          }
           img = document.createElement("img");
           img.onload = function() {
             var canvas, ctx, resizeInfo, thumbnail, _ref, _ref1, _ref2, _ref3;
